@@ -1,0 +1,142 @@
+{
+  "version": "1.0",
+  "model_type": "RandomForest",
+  "trained_date": "2025-10-18 18:31:01",
+  "feature_weights": {
+    "budget": 0.5421222781266425,
+    "price": 0.16095448102044346,
+    "has_allergy": 0.14342665699847632,
+    "value_score": 0.11959617935623275,
+    "allergen_count": 0.0189938013685386,
+    "quality_score": 0.004635302250363015,
+    "rank": 0.003926549653695087,
+    "beneficial_count": 0.002501809938009448,
+    "category_encoded": 0.002392563000887637,
+    "skin_type_encoded": 0.00145037828671123
+  },
+  "rules": {
+    "base_score": 60.0,
+    "max_score": 100.0,
+    "min_score": 0.0,
+    "threshold_score": 50.0,
+    "hard_constraints": {
+      "price_must_be_within_budget": true,
+      "skin_type_must_match": true,
+      "category_must_match": true,
+      "stock_must_be_available": true
+    },
+    "scoring_components": {
+      "rank_score": {
+        "weight": 0.003926549653695087,
+        "max_points": 20.0,
+        "formula": "(rank / 5.0) * max_points",
+        "description": "Product rating quality"
+      },
+      "price_efficiency": {
+        "weight": 0.16095448102044346,
+        "max_points": 15.0,
+        "formula": "(1.0 - price/budget) * max_points",
+        "description": "Cheaper relative to budget = better"
+      },
+      "value_score_bonus": {
+        "weight": 0.11959617935623275,
+        "max_points": 10.0,
+        "formula": "min(max_points, value_score * 10.0)",
+        "description": "Quality to price ratio"
+      },
+      "allergen_penalty": {
+        "weight": 0.0189938013685386,
+        "max_penalty": 15.0,
+        "formula_with_allergy": "min(max_penalty, allergen_count * 3.0)",
+        "formula_without_allergy": "min(max_penalty, allergen_count * 1.0)",
+        "description": "More allergens = lower score"
+      },
+      "beneficial_bonus": {
+        "weight": 0.002501809938009448,
+        "max_points": 10.0,
+        "formula": "min(max_points, beneficial_count * 1.5)",
+        "description": "More beneficial ingredients = higher score"
+      },
+      "quality_score_bonus": {
+        "weight": 0.004635302250363015,
+        "max_points": 5.0,
+        "formula": "quality_score * max_points",
+        "description": "Normalized product quality"
+      }
+    },
+    "ranking_criteria": [
+      {
+        "field": "match_score",
+        "order": "DESC",
+        "priority": 1
+      },
+      {
+        "field": "rank",
+        "order": "DESC",
+        "priority": 2
+      },
+      {
+        "field": "price",
+        "order": "ASC",
+        "priority": 3
+      }
+    ],
+    "top_n_results": 5
+  },
+  "validation_samples": [
+    {
+      "test_case": {
+        "budget": 50,
+        "skin_type": "oily",
+        "has_allergy": false,
+        "category": "moisturizer"
+      },
+      "product": {
+        "name": "Your Skin But Better™ CC+™ Cream with SPF 50+",
+        "price": 38.0,
+        "rank": 4.1,
+        "allergen_count": 3,
+        "beneficial_count": 8
+      },
+      "ml_probability": 0.65,
+      "calculated_score": 100.0,
+      "recommended": true
+    },
+    {
+      "test_case": {
+        "budget": 100,
+        "skin_type": "sensitive",
+        "has_allergy": true,
+        "category": "moisturizer"
+      },
+      "product": {
+        "name": "Your Skin But Better™ CC+™ Cream with SPF 50+",
+        "price": 38.0,
+        "rank": 4.1,
+        "allergen_count": 3,
+        "beneficial_count": 8
+      },
+      "ml_probability": 0.39,
+      "calculated_score": 100.0,
+      "recommended": true
+    },
+    {
+      "test_case": {
+        "budget": 30,
+        "skin_type": "dry",
+        "has_allergy": false,
+        "category": "moisturizer"
+      },
+      "product": {
+        "name": "Ultra Facial Cream",
+        "price": 29.0,
+        "rank": 4.4,
+        "allergen_count": 4,
+        "beneficial_count": 3
+      },
+      "ml_probability": 0.78,
+      "calculated_score": 93.0,
+      "recommended": true
+    }
+  ]
+}

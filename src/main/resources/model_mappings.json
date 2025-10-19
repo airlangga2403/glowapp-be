@@ -1,0 +1,61 @@
+{
+  "skin_type_map": {
+    "combination": 0,
+    "dry": 1,
+    "normal": 2,
+    "oily": 3,
+    "sensitive": 4
+  },
+  "category_map": {
+    "moisturizer": 0,
+    "cleanser": 1,
+    "serum": 2
+  },
+  "allergen_keywords": [
+    "fragrance",
+    "alcohol denat",
+    "methylparaben",
+    "propylparaben",
+    "sodium benzoate",
+    "phenoxyethanol",
+    "lanolin",
+    "citrus",
+    "parfum",
+    "limonene",
+    "linalool",
+    "citronellol",
+    "geraniol",
+    "citral",
+    "benzyl",
+    "chlorphenesin"
+  ],
+  "beneficial_keywords": [
+    "hyaluronic",
+    "glycerin",
+    "niacinamide",
+    "peptide",
+    "vitamin",
+    "squalane",
+    "ceramide",
+    "aloe",
+    "ferment filtrate",
+    "collagen",
+    "tocopherol",
+    "panthenol",
+    "retinol",
+    "adenosine",
+    "copper"
+  ],
+  "feature_columns": [
+    "budget",
+    "skin_type_encoded",
+    "has_allergy",
+    "category_encoded",
+    "price",
+    "rank",
+    "allergen_count",
+    "beneficial_count",
+    "quality_score",
+    "value_score"
+  ]
+}

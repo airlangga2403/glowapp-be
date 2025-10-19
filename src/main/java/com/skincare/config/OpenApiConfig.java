@@ -34,7 +34,7 @@ public class OpenApiConfig {
                 .description("Skripsi API Local Development Server");
 
         Server deployServer = new Server()
-                .url("http://43.157.209.107:30820/kai-test-kafka")
+                .url("http://43.157.209.107:30825/kai-test-kafka")
                 .description("Skripsi API Deployment Server");
 
         return new OpenAPI()

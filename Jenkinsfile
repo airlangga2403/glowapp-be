@@ -40,7 +40,7 @@ spec:
         GIT_USER_EMAIL          = "jenkins-ci@your-domain.com"
 
         // --- Variabel Otomatis (Sudah Benar) ---
-        APP_NAME                = "glowapp"
+        APP_NAME                = "kai-test-kafka"
         DOCKER_IMAGE_NAME       = "${DOCKER_USERNAME}/${APP_NAME}"
     }
 
